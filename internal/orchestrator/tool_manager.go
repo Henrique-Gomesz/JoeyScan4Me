@@ -51,7 +51,11 @@ func CheckToolSetup(opt *Options) error {
 	return nil
 }
 
-func RunSubFinder(opt *Options) {
+func RunSubfinder(opt *Options) {
 	logging.LogInfo("Running Subfinder")
-	exec.Command("subfinder", "-d", opt.Domain, "--all", "--output", "subfinder.txt")
+	cmd := exec.Command("subfinder", "-d", opt.Domain, "--all", "--output", GetOutputFilePath(opt.Workdir, "subfinder", "subfinder.txt", opt.Domain))
+
+	cmd.Run()
+	cmd.Wait()
+	logging.LogInfo("Saving Subfinder results to " + GetOutputFilePath(opt.Workdir, "subfinder", "subfinder.txt", opt.Domain))
 }

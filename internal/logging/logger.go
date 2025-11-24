@@ -4,16 +4,12 @@ import "github.com/fatih/color"
 
 func PrintBanner() {
 	color.Magenta(`
-+--------------------------------------------------+
-|                                                  |
-|                                                  |
-|	        JoeyScan4Me - Recon toolkit            |
-|                                                  |
-|               |\__/,|   (\                       |
-|             _.|o o  |_   ) )                     |
-|           -(((---(((--------                     |
-|                                                  |
-+--------------------------------------------------+									  
+		JoeyScan4Me - Recon toolkit
+
+               |\__/,|   (\                       
+             _.|o o  |_   ) )                     
+           -(((---(((--------  
+			by: Henrique-Gomesz                  							  
 `)
 }
 

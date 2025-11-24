@@ -11,7 +11,7 @@ func StarScan(opt *Options) {
 
 	go func() {
 		defer wg.Done()
-		RunSubFinder(opt)
+		RunSubfinder(opt)
 	}()
 
 	wg.Wait()
