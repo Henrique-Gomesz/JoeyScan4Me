@@ -37,8 +37,9 @@ func CheckToolSetup(opt *Options) error {
 		os.Exit(1)
 	}
 
+	logging.LogInfo("Checking tools")
+
 	for _, tool := range toolsConfig.Tools {
-		logging.LogInfo("Checking tools")
 		_, err := exec.LookPath(tool.Name)
 		if err != nil {
 			logging.LogInfo(fmt.Sprintf("Tool '%s' not found. Check if tool is correctly set on PATH or install it using: %s", tool.Name, tool.InstallCommand))
@@ -53,9 +54,22 @@ func CheckToolSetup(opt *Options) error {
 
 func RunSubfinder(opt *Options) {
 	logging.LogInfo("Running Subfinder")
-	cmd := exec.Command("subfinder", "-d", opt.Domain, "--all", "--output", GetOutputFilePath(opt.Workdir, "subfinder", "subfinder.txt", opt.Domain))
+
+	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
+	cmd := exec.Command("subfinder", "-d", opt.Domain, "-all", "--output", filePath)
 
 	cmd.Run()
 	cmd.Wait()
-	logging.LogInfo("Saving Subfinder results to " + GetOutputFilePath(opt.Workdir, "subfinder", "subfinder.txt", opt.Domain))
+	logging.LogInfo("Saving Subfinder results to " + filePath)
+}
+
+func RunHttpx(opt *Options) {
+	logging.LogInfo("Running Httpx")
+
+	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxOutputFile)
+	cmd := exec.Command("httpx", "-l", filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile), "-o", filePath)
+
+	cmd.Run()
+	cmd.Wait()
+	logging.LogInfo("Saving Httpx results to " + filePath)
 }

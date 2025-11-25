@@ -2,8 +2,13 @@
     "tools": [
         {
             "name": "subfinder",
-            "command": "subfinder -d {domain} -o {output_file} -all",
+            "command": "subfinder",
             "install_command": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest"
+        },
+        {
+            "name": "httpx",
+            "command": "httpx",
+            "install_command": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest"
         }
     ]
 }

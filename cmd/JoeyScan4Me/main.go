@@ -12,5 +12,5 @@ func main() {
 
 	orchestrator.CheckToolSetup(opt)
 
-	orchestrator.StarScan(opt)
+	orchestrator.StartScan(opt)
 }

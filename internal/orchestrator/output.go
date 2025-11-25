@@ -2,6 +2,9 @@ package orchestrator
 
 import "path/filepath"
 
-func GetOutputFilePath(workdir, tool, fileName, domain string) string {
-	return filepath.Join(workdir, "output", domain, tool, fileName)
+var SubfinderOutputFile = "subdomains.txt"
+var HttpxOutputFile = "up_subdomains.txt"
+
+func GetOutputFilePath(workdir, tool, domain string) string {
+	return filepath.Join(workdir, "output", domain, tool)
 }
