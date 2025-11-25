@@ -14,6 +14,7 @@ func StartScan(opt *Options) {
 
 	go func() {
 		defer wg.Done()
+		RunKatana(opt)
 	}()
 
 	wg.Wait()

@@ -9,6 +9,11 @@
             "name": "httpx",
             "command": "httpx",
             "install_command": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest"
+        },
+        {
+            "name": "katana",
+            "command": "katana",
+            "install_command": "go install -v github.com/projectdiscovery/katana/cmd/katana@latest"
         }
     ]
 }

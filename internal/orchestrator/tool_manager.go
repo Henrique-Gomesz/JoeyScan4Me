@@ -53,23 +53,35 @@ func CheckToolSetup(opt *Options) error {
 }
 
 func RunSubfinder(opt *Options) {
-	logging.LogInfo("Running Subfinder")
+	logging.LogInfo("Searching for subdomains")
 
 	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
 	cmd := exec.Command("subfinder", "-d", opt.Domain, "-all", "--output", filePath)
 
 	cmd.Run()
 	cmd.Wait()
-	logging.LogInfo("Saving Subfinder results to " + filePath)
+	logging.LogInfo("Saving subdomains results to " + filePath)
 }
 
 func RunHttpx(opt *Options) {
-	logging.LogInfo("Running Httpx")
+	logging.LogInfo("Checking alive subdomains")
 
 	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxOutputFile)
 	cmd := exec.Command("httpx", "-l", filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile), "-o", filePath)
 
 	cmd.Run()
 	cmd.Wait()
-	logging.LogInfo("Saving Httpx results to " + filePath)
+	logging.LogInfo("Saving up subdomains results to " + filePath)
+}
+
+func RunKatana(opt *Options) {
+	logging.LogInfo("Crawling alive subdomains")
+
+	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "crawling", opt.Domain), KatanaOutputFile)
+
+	cmd := exec.Command("katana", "-list", filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxOutputFile), "-o", filePath)
+
+	cmd.Run()
+	cmd.Wait()
+	logging.LogInfo("Saving crawling results to " + filePath)
 }
