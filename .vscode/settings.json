@@ -1,7 +1,7 @@
 {
-    "go.goroot": "/opt/homebrew/opt/go/libexec",
-    "go.gopath": "/Users/henriquegomes/go",
-    "go.toolsGopath": "/Users/henriquegomes/go",
+    "go.goroot": "C:\\Users\\gomes\\go/libexec",
+    "go.gopath": "C:\\Users\\gomes\\go",
+    "go.toolsGopath": "C:\\Users\\gomes\\go",
     "go.alternateTools": {
         "go": "/opt/homebrew/bin/go"
     }

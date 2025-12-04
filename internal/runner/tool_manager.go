@@ -1,4 +1,4 @@
-package orchestrator
+package runner
 
 import (
 	"JoeyScan4Me/config"
@@ -50,17 +50,6 @@ func CheckToolSetup(opt *Options) error {
 	}
 
 	return nil
-}
-
-func RunSubfinder(opt *Options) {
-	logging.LogInfo("Searching for subdomains")
-
-	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
-	cmd := exec.Command("subfinder", "-d", opt.Domain, "-all", "--output", filePath)
-
-	cmd.Run()
-	cmd.Wait()
-	logging.LogInfo("Saving subdomains results to " + filePath)
 }
 
 func RunHttpx(opt *Options) {

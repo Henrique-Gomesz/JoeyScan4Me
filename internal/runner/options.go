@@ -1,9 +1,8 @@
-package orchestrator
+package runner
 
 import (
 	"JoeyScan4Me/internal/logging"
 	"os"
-
 	"github.com/projectdiscovery/goflags"
 )
 

@@ -2,15 +2,15 @@ package main
 
 import (
 	"JoeyScan4Me/internal/logging"
-	"JoeyScan4Me/internal/orchestrator"
+	"JoeyScan4Me/internal/runner"
 )
-
+	
 func main() {
 	logging.PrintBanner()
 
-	opt := orchestrator.ParseOptions()
+	opt := runner.ParseOptions()
 
-	orchestrator.CheckToolSetup(opt)
+	//runner.CheckToolSetup(opt)
 
-	orchestrator.StartScan(opt)
+	runner.StartScan(opt)
 }
