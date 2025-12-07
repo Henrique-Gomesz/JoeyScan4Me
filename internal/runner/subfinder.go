@@ -2,44 +2,45 @@ package runner
 
 import (
 	"JoeyScan4Me/internal/logging"
-	"bytes"
 	"context"
-	"io"
 	"log"
+	"os"
 	"path/filepath"
+
 	subfinderRunner "github.com/projectdiscovery/subfinder/v2/pkg/runner"
 )
 
 func RunSubfinder(opt *Options) {
 	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
+	file, err := CreateOutputFile(filePath)
 
-	subfinderOpts := &subfinderRunner.Options{
-		Threads:            10, 
-		Timeout:            30, 
-		MaxEnumerationTime: 10, 
-		OutputDirectory: filePath,
+	if err != nil {
+		log.Fatalf("Failed to create output file: %v", err)
 	}
 	
+	defer file.Close()
+
+	subfinderOpts := &subfinderRunner.Options{
+		Threads:            10,
+		Timeout:            30,
+		MaxEnumerationTime: 10,
+		All:                true,
+		Domain:             []string{opt.Domain},
+		OutputFile:         filePath,
+		OutputDirectory:    filepath.Dir(filePath),
+		Output:             file,
+	}
+
 	subfinder, err := subfinderRunner.NewRunner(subfinderOpts)
 	if err != nil {
-		logging.LogError("failed to create subfinder runner: %v", err)
+		logging.LogError("Failed to create subfinder runner", err)
+		log.Fatalf("Failed to create subfinder runner: %v", err)
 	}
 
-	output := &bytes.Buffer{}
-	var sourceMap map[string]map[string]struct{}
+	if err = subfinder.RunEnumerationWithCtx(context.Background()); err != nil {
+		logging.LogError("Failed to enumerate subdomains", err)
 
-	if sourceMap, err = subfinder.EnumerateSingleDomainWithCtx(context.Background(), opt.Domain, []io.Writer{output}); err != nil {
-		log.Fatalf("failed to enumerate single domain: %v", err)
+		// end process execution because subfinder is essential to run the next tools;
+		os.Exit(1)
 	}
-
-	log.Printf("sourceMap dump: %+v", sourceMap)
-	for source, domains := range sourceMap {
-		log.Printf("Source: %s", source)
-		for d := range domains {
-			log.Printf("  - %s", d)
-		}
-	}
-
-	logging.LogInfo("Searching for subdomains")
-	logging.LogInfo("Saving subdomains results to " + filePath)
 }

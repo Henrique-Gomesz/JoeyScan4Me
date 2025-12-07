@@ -52,17 +52,6 @@ func CheckToolSetup(opt *Options) error {
 	return nil
 }
 
-func RunHttpx(opt *Options) {
-	logging.LogInfo("Checking alive subdomains")
-
-	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxOutputFile)
-	cmd := exec.Command("httpx", "-l", filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile), "-o", filePath)
-
-	cmd.Run()
-	cmd.Wait()
-	logging.LogInfo("Saving up subdomains results to " + filePath)
-}
-
 func RunKatana(opt *Options) {
 	logging.LogInfo("Crawling alive subdomains")
 

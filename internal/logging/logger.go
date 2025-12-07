@@ -4,17 +4,21 @@ import "github.com/fatih/color"
 
 func PrintBanner() {
 	color.Magenta(`
-		JoeyScan4Me - Recon toolkit
+JoeyScan4Me - Simple recon toolkit
 
-               |\__/,|   (\                       
-             _.|o o  |_   ) )                     
-           -(((---(((--------  
-			by: Henrique-Gomesz                  							  
+    |\__/,|   (\
+  _.|o o  |_   ) )
+-(((---(((--------
+by: Henrique-Gomesz              							  
 `)
 }
 
 func LogError(message string, err error) {
-	color.Red("[x] %s: %v", message, err)
+	if err != nil {
+		color.Red("[x] %s: %v", message, err)
+	} else {
+		color.Red("[x] %s", message)
+	}
 }
 
 func LogInfo(message string) {
