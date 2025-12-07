@@ -50,3 +50,17 @@ Running a scan on example.com and starting the gowitness server at the end:
 ```bash
 joeyscan4me -d example.com -w /path/to/output -server
 ```
+
+## Output Files
+The output files will be stored in the specified working directory (or current directory by default) with the following structure:
+```
+/output
+├── example.com/
+│   ├── subdomains.txt              # List of discovered subdomains
+│   ├── up_subdomains.txt           # List of live HTTP services
+│   ├── up_subdomains_with_tech.txt # Live services with technology detection
+│   ├── crawling_results.txt        # Web crawling results
+│   └── screenshots/
+│       └── gowitness.sqlite3       # Screenshot database
+│       └── screenshots...       # Screenshot images
+```
