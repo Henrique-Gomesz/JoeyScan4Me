@@ -37,7 +37,7 @@ by: Henrique-Gomesz
 
 
 Usage:
-  /Users/henriquegomes/Library/Caches/go-build/84/842812173b1a48e0fbf740cee2403639a09b390da8862fbe5f5b4d5d3b6e066d-d/main [flags]
+  joeyscan4me [flags]
 
 Flags:
    -d string  domain to scan (e.g. example.com)
