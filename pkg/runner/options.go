@@ -1,9 +1,10 @@
 package runner
 
 import (
-	"JoeyScan4Me/pkg/logging"
 	"os"
 	"strings"
+
+	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
 
 	"github.com/projectdiscovery/goflags"
 )

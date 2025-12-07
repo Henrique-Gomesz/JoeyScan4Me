@@ -1,10 +1,11 @@
 package runner
 
 import (
-	"JoeyScan4Me/pkg/logging"
 	"context"
 	"os"
 	"path/filepath"
+
+	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
 
 	subfinderRunner "github.com/projectdiscovery/subfinder/v2/pkg/runner"
 )

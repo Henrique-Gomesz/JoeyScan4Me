@@ -1,10 +1,11 @@
 package runner
 
 import (
-	"JoeyScan4Me/pkg/logging"
 	"log/slog"
 	"os"
 	"path/filepath"
+
+	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
 
 	"github.com/sensepost/gowitness/pkg/log"
 	goWitnessRunner "github.com/sensepost/gowitness/pkg/runner"

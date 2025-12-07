@@ -1,4 +1,4 @@
-module JoeyScan4Me
+module github.com/Henrique-Gomesz/JoeyScan4Me
 
 go 1.25.1
 

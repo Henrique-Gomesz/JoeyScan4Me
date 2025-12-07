@@ -1,11 +1,12 @@
 package runner
 
 import (
-	"JoeyScan4Me/pkg/logging"
 	"fmt"
 	"math"
 	"path/filepath"
 	"sync"
+
+	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
 
 	"github.com/projectdiscovery/katana/pkg/engine/standard"
 	katanaTypes "github.com/projectdiscovery/katana/pkg/types"

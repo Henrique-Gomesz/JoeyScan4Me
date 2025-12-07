@@ -1,11 +1,12 @@
 package runner
 
 import (
-	"JoeyScan4Me/pkg/logging"
 	"fmt"
 	"log"
 	"path/filepath"
 	"strings"
+
+	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
 
 	httpRunner "github.com/projectdiscovery/httpx/runner"
 )
