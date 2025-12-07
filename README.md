@@ -1,23 +1,52 @@
 # JoeyScan4Me
 
-A easy-to-use tool for subdomain enumeration, HTTP probing, web crawling, and screenshot capturing all in one.
+A easy-to-use tool kit for subdomain enumeration, HTTP probing, web crawling, and screenshot capturing all in one.
 
 ## Features
 
-- **Subdomain Enumeration**: Uses Subfinder to discover subdomains
-- **HTTP Probing**: Uses HTTPX to identify live web services
-- **Web Crawling**: Uses Katana to crawl discovered websites
-- **Screenshot Capture and Dashboard**: Uses Gowitness to capture screenshots with database storage and a web dashboard for easy viewing
-
-## Execution flow
-
-1. Subdomain Enumeration with Subfinder
-2. HTTP Probing with HTTPX
-3. Web Crawling with Katana
-4. Screenshot Capture and Dashboard with Gowitness
+- **Subdomain Enumeration**: Uses [Subfinder](https://github.com/projectdiscovery/subfinder) to discover subdomains
+- **HTTP Probing**: Uses [HTTPX](https://github.com/projectdiscovery/httpx) to identify live web services
+- **Web Crawling**: Uses [Katana](https://github.com/projectdiscovery/katana) to crawl discovered websites
+- **Screenshot Capture and Dashboard**: Uses [Gowitness](https://github.com/sensepost/gowitness) to capture screenshots with database storage and a web dashboard for easy viewing
 
 ## Installation
+You can install JoeyScan4Me using the following methods:
+Require Go 1.21 or higher.
 
+## From source
 ```bash
-go build -o joesyscan4me cmd/JoeyScan4Me/main.go
+go install github.com/Henrique-Gomesz/JoeyScan4Me/cmd/JoeyScan4Me@latest
+```
+## Manual build
+```bash
+git clone https://github.com/Henrique-Gomesz/JoeyScan4Me.git
+cd JoeyScan4Me
+go build -o joeyscan4me cmd/JoeyScan4Me/main.go
+```
+
+## Usage
+```bash
+$ joeyscan4me -h
+
+JoeyScan4Me - Simple and helpful recon toolkit
+
+    |\__/,|   ('\
+  _.|o o  |_   ) )
+-(((---(((--------
+by: Henrique-Gomesz
+
+
+Usage:
+  /Users/henriquegomes/Library/Caches/go-build/84/842812173b1a48e0fbf740cee2403639a09b390da8862fbe5f5b4d5d3b6e066d-d/main [flags]
+
+Flags:
+   -d string  domain to scan (e.g. example.com)
+   -w string  working directory for output files, defaults to current directory (default "./")
+   -server    start gowitness server at the end of scan to view screenshots
+```
+
+## Example
+Running a scan on example.com and starting the gowitness server at the end:
+```bash
+joeyscan4me -d example.com -w /path/to/output -server
 ```
