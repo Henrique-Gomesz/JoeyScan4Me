@@ -2,19 +2,24 @@ package logging
 
 import "github.com/fatih/color"
 
-func PrintBanner() {
+func PrintBanner(version string) {
 	color.Magenta(`
-		JoeyScan4Me - Recon toolkit
+JoeyScan4Me - Simple and helpful recon toolkit
 
-               |\__/,|   (\                       
-             _.|o o  |_   ) )                     
-           -(((---(((--------  
-			by: Henrique-Gomesz                  							  
-`)
+    |\__/,|   ('\
+  _.|o o  |_   ) )
+-(((---(((--------
+by: Henrique-Gomesz  
+Version: %s
+`, version)
 }
 
 func LogError(message string, err error) {
-	color.Red("[x] %s: %v", message, err)
+	if err != nil {
+		color.Red("[x] %s: %v", message, err)
+	} else {
+		color.Red("[x] %s", message)
+	}
 }
 
 func LogInfo(message string) {

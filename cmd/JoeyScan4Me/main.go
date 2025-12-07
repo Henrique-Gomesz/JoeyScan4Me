@@ -1,16 +1,16 @@
 package main
 
 import (
-	"JoeyScan4Me/internal/logging"
-	"JoeyScan4Me/internal/orchestrator"
+	"JoeyScan4Me/pkg/logging"
+	"JoeyScan4Me/pkg/runner"
 )
 
+var Version string = "1.0.0"
+
 func main() {
-	logging.PrintBanner()
+	logging.PrintBanner(Version)
 
-	opt := orchestrator.ParseOptions()
+	opt := runner.ParseOptions()
 
-	orchestrator.CheckToolSetup(opt)
-
-	orchestrator.StartScan(opt)
+	runner.StartScan(opt)
 }
