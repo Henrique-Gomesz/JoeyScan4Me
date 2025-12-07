@@ -15,7 +15,7 @@ Require Go 1.21 or higher.
 
 ## From source
 ```bash
-go install github.com/Henrique-Gomesz/JoeyScan4Me/cmd/joeyscan4me@latest
+go install github.com/Henrique-Gomesz/JoeyScan4Me/cmd/JoeyScan4Me@latest
 ```
 ## Manual build
 ```bash
