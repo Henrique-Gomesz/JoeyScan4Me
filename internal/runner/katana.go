@@ -44,7 +44,9 @@ func RunKatana(opt *Options) {
 		Strategy:               "depth-first",
 		ScrapeJSResponses:      true,
 		ScrapeJSLuiceResponses: true,
-		OutputFile: katanaOutputPath,
+		OutputFile:             katanaOutputPath,
+		ExtensionFilter:        []string{"css"},
+		Scope:                  urls,
 	}
 
 	crawlerOptions, err := katanaTypes.NewCrawlerOptions(katanaOpts)

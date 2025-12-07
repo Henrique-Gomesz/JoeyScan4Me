@@ -60,5 +60,7 @@ func RunHttpx(opt *Options) {
 	}
 
 	defer httpx.Close()
+
+	logging.LogInfo("Running httpx")
 	httpx.RunEnumeration()
 }

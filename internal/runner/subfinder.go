@@ -35,6 +35,7 @@ func RunSubfinder(opt *Options) {
 		logging.LogError("Failed to create subfinder runner", err)
 	}
 
+	logging.LogInfo("Running subfinder")
 	if err = subfinder.RunEnumerationWithCtx(context.Background()); err != nil {
 		logging.LogError("Failed to enumerate subdomains", err)
 
