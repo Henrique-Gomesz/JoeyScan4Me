@@ -1,8 +1,7 @@
 package runner
 
 func StartScan(opt *Options) {
-	
 
-	//RunSubfinder(opt)
+	RunSubfinder(opt)
 	RunHttpx(opt)
 }

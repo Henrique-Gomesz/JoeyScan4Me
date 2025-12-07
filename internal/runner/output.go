@@ -9,6 +9,7 @@ import (
 
 var SubfinderOutputFile = "subdomains.txt"
 var HttpxOutputFile = "up_subdomains.txt"
+var HttpxTechOutputFile = "up_subdomains_with_tech.txt"
 var KatanaOutputFile = "crawling_results.txt"
 
 func GetOutputFilePath(workdir, tool, domain string) string {
@@ -29,4 +30,3 @@ func CreateOutputFile(filePath string) (*os.File, error) {
 
 	return file, nil
 }
-
