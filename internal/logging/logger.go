@@ -4,9 +4,9 @@ import "github.com/fatih/color"
 
 func PrintBanner() {
 	color.Magenta(`
-JoeyScan4Me - Simple recon toolkit
+JoeyScan4Me - Simple and helpful recon toolkit
 
-    |\__/,|   (\
+    |\__/,|   ('\
   _.|o o  |_   ) )
 -(((---(((--------
 by: Henrique-Gomesz              							  

@@ -3,7 +3,6 @@ package runner
 import "sync"
 
 func StartScan(opt *Options) {
-
 	RunSubfinder(opt)
 	RunHttpx(opt)
 
@@ -23,4 +22,9 @@ func StartScan(opt *Options) {
 	}()
 
 	wg.Wait()
+
+	// start go witness server if --server flag is set
+	if opt.Server {
+		StartGoWitnessServer(opt)
+	}
 }

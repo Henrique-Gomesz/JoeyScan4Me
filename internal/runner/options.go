@@ -11,16 +11,16 @@ import (
 type Options struct {
 	Domain  string
 	Workdir string
+	Server  bool
 }
 
 func ParseOptions() *Options {
 	opt := &Options{}
 	flagSet := goflags.NewFlagSet()
 
-	flagSet.SetDescription("JoeyScan4Me toolkit")
-
 	flagSet.StringVar(&opt.Domain, "d", "", "domain to scan (e.g. example.com)")
 	flagSet.StringVar(&opt.Workdir, "w", "./", "working directory for output files, defaults to current directory")
+	flagSet.BoolVar(&opt.Server, "server", false, "start gowitness server at the end of scan to view screenshots")
 
 	if err := flagSet.Parse(); err != nil {
 		logging.LogError("Error parsing flags:", err)

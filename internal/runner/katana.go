@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"path/filepath"
+	"sync"
 
 	"github.com/projectdiscovery/katana/pkg/engine/standard"
 	katanaTypes "github.com/projectdiscovery/katana/pkg/types"
@@ -37,8 +38,8 @@ func RunKatana(opt *Options) {
 		MaxDepth:               3,
 		BodyReadSize:           math.MaxInt,
 		Timeout:                10,
-		Concurrency:            20,
-		Parallelism:            50,
+		Concurrency:            100,
+		Parallelism:            100,
 		Retries:                3,
 		RateLimit:              150,
 		Strategy:               "depth-first",
@@ -61,17 +62,24 @@ func RunKatana(opt *Options) {
 	}
 	defer crawler.Close()
 
+	var wg sync.WaitGroup
+
 	for _, url := range urls {
 		if url == "" {
 			continue
 		}
 
-		err = crawler.Crawl(url)
-
-		if err != nil {
-			logging.LogError(fmt.Sprintf("Could not crawl %s", url), err)
-		}
+		wg.Add(1)
+		go func(targetURL string) {
+			defer wg.Done()
+			err := crawler.Crawl(targetURL)
+			if err != nil {
+				logging.LogError(fmt.Sprintf("Could not crawl %s", targetURL), err)
+			}
+		}(url)
 	}
+
+	wg.Wait()
 
 	logging.LogSuccess("Results saved to " + katanaOutputPath)
 }
