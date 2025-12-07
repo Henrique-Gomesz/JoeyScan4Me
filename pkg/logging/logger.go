@@ -2,15 +2,16 @@ package logging
 
 import "github.com/fatih/color"
 
-func PrintBanner() {
+func PrintBanner(version string) {
 	color.Magenta(`
 JoeyScan4Me - Simple and helpful recon toolkit
 
     |\__/,|   ('\
   _.|o o  |_   ) )
 -(((---(((--------
-by: Henrique-Gomesz              							  
-`)
+by: Henrique-Gomesz  
+Version: %s
+`, version)
 }
 
 func LogError(message string, err error) {

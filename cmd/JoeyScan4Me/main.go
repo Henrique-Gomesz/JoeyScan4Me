@@ -1,12 +1,14 @@
 package main
 
 import (
-	"JoeyScan4Me/internal/logging"
-	"JoeyScan4Me/internal/runner"
+	"JoeyScan4Me/pkg/logging"
+	"JoeyScan4Me/pkg/runner"
 )
-	
+
+var Version string = "1.0.0"
+
 func main() {
-	logging.PrintBanner()
+	logging.PrintBanner(Version)
 
 	opt := runner.ParseOptions()
 

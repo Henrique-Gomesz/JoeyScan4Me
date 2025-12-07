@@ -1,7 +1,7 @@
 package runner
 
 import (
-	"JoeyScan4Me/internal/logging"
+	"JoeyScan4Me/pkg/logging"
 	"os"
 	"strings"
 

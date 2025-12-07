@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"JoeyScan4Me/internal/logging"
+	"JoeyScan4Me/pkg/logging"
 )
 
 var SubfinderOutputFile = "subdomains.txt"
