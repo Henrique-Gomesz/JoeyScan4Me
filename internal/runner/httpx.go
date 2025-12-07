@@ -11,19 +11,19 @@ import (
 )
 
 func RunHttpx(opt *Options) {
-	outputPath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxOutputFile)
-	techOutputPath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), HttpxTechOutputFile)
-	subfinderFile := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
+	outputPath := filepath.Join(GetOutputFilePath(opt.Workdir, opt.Domain), HttpxOutputFile)
+	techOutputPath := filepath.Join(GetOutputFilePath(opt.Workdir, opt.Domain), HttpxTechOutputFile)
+	subfinderFile := filepath.Join(GetOutputFilePath(opt.Workdir, opt.Domain), SubfinderOutputFile)
 
 	file, err := CreateOutputFile(outputPath)
 	if err != nil {
-		log.Fatalf("Failed to create output file: %v", err)
+		logging.LogError("Failed to create output file:", err)
 	}
 	defer file.Close()
 
 	techFile, err := CreateOutputFile(techOutputPath)
 	if err != nil {
-		log.Fatalf("Failed to create tech output file: %v", err)
+		logging.LogError("Failed to create tech output file:", err)
 	}
 	defer techFile.Close()
 
@@ -57,10 +57,8 @@ func RunHttpx(opt *Options) {
 	httpx, err := httpRunner.New(httpxOpts)
 	if err != nil {
 		logging.LogError("Failed to create httpx runner", err)
-		log.Fatalf("Failed to create httpx runner: %v", err)
 	}
 
 	defer httpx.Close()
-
 	httpx.RunEnumeration()
 }

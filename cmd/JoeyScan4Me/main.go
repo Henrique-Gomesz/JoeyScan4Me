@@ -10,7 +10,5 @@ func main() {
 
 	opt := runner.ParseOptions()
 
-	//runner.CheckToolSetup(opt)
-
 	runner.StartScan(opt)
 }

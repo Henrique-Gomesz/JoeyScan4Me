@@ -3,7 +3,6 @@ package runner
 import (
 	"JoeyScan4Me/internal/logging"
 	"context"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -11,13 +10,13 @@ import (
 )
 
 func RunSubfinder(opt *Options) {
-	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, "subdomains", opt.Domain), SubfinderOutputFile)
+	filePath := filepath.Join(GetOutputFilePath(opt.Workdir, opt.Domain), SubfinderOutputFile)
 	file, err := CreateOutputFile(filePath)
 
 	if err != nil {
-		log.Fatalf("Failed to create output file: %v", err)
+		logging.LogError("Failed to create output file:", err)
 	}
-	
+
 	defer file.Close()
 
 	subfinderOpts := &subfinderRunner.Options{
@@ -34,7 +33,6 @@ func RunSubfinder(opt *Options) {
 	subfinder, err := subfinderRunner.NewRunner(subfinderOpts)
 	if err != nil {
 		logging.LogError("Failed to create subfinder runner", err)
-		log.Fatalf("Failed to create subfinder runner: %v", err)
 	}
 
 	if err = subfinder.RunEnumerationWithCtx(context.Background()); err != nil {
