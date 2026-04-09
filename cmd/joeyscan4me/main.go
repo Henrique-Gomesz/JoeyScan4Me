@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/runner"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/runner"
 )
 
 var Version string = "1.1.0"

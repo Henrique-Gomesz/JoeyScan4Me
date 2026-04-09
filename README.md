@@ -16,13 +16,13 @@ Require Go 1.21 or higher.
 
 ## From source
 ```bash
-go install github.com/Henrique-Gomesz/JoeyScan4Me/cmd/JoeyScan4Me@latest
+go install github.com/henrique-gomesz/joeyscan4me/cmd/joeyscan4me@latest
 ```
 ## Manual build
 ```bash
-git clone https://github.com/Henrique-Gomesz/JoeyScan4Me.git
+git clone https://github.com/henrique-gomesz/joeyscan4me.git
 cd JoeyScan4Me
-go build -o joeyscan4me cmd/JoeyScan4Me/main.go
+go build -o joeyscan4me cmd/joeyscan4me/main.go
 ```
 
 ## Usage

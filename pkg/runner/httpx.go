@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
 
 	httpRunner "github.com/projectdiscovery/httpx/runner"
 )

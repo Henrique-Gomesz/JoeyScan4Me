@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
 
 	"github.com/projectdiscovery/goflags"
 )

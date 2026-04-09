@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
 
 	subfinderRunner "github.com/projectdiscovery/subfinder/v2/pkg/runner"
 )

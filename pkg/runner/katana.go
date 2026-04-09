@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
 
 	"github.com/projectdiscovery/katana/pkg/engine/standard"
 	katanaTypes "github.com/projectdiscovery/katana/pkg/types"

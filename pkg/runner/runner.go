@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Henrique-Gomesz/JoeyScan4Me/pkg/logging"
+	"github.com/henrique-gomesz/joeyscan4me/pkg/logging"
 )
 
 func StartScan(opt *Options) error {

@@ -21,10 +21,10 @@ jobs:
       - name: Extract version from main.go
         id: version
         run: |
-          VERSION=$(sed -n 's/^var Version string = "\([^"]*\)"$/\1/p' cmd/JoeyScan4Me/main.go)
+          VERSION=$(sed -n 's/^var Version string = "\([^"]*\)"$/\1/p' cmd/joeyscan4me/main.go)
 
           if [ -z "$VERSION" ]; then
-            echo "Could not extract version from cmd/JoeyScan4Me/main.go"
+            echo "Could not extract version from cmd/joeyscan4me/main.go"
             exit 1
           fi
 
