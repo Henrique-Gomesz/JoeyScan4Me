@@ -33,7 +33,7 @@ type summaryFiles struct {
 	SubdomainsFile        string `json:"subdomains_file"`
 	LiveURLsFile          string `json:"live_urls_file"`
 	LiveURLsWithTechFile  string `json:"live_urls_with_tech_file"`
-	KatanaOutputFile      string `json:"katana_output_file"`
+	KatanaCrawlingDir     string `json:"katana_crawling_dir"`
 	GowitnessDatabaseFile string `json:"gowitness_database_file"`
 }
 
@@ -44,7 +44,7 @@ func WriteScanSummary(opt *Options, startedAt, finishedAt time.Time) (string, er
 	subdomainsFile := filepath.Join(outputDir, SubfinderOutputFile)
 	liveURLsFile := filepath.Join(outputDir, HttpxOutputFile)
 	liveURLsWithTechFile := filepath.Join(outputDir, HttpxTechOutputFile)
-	katanaOutputFile := filepath.Join(outputDir, KatanaOutputFile)
+	crawlingDir := filepath.Join(outputDir, KatanaCrawlingDir)
 	screenshotsDir := filepath.Join(outputDir, "screenshots")
 	gowitnessDBFile := filepath.Join(screenshotsDir, "gowitness.sqlite3")
 
@@ -60,7 +60,7 @@ func WriteScanSummary(opt *Options, startedAt, finishedAt time.Time) (string, er
 	if err != nil {
 		return "", err
 	}
-	katanaEntriesCount, err := countUniqueLinesFromFile(katanaOutputFile)
+	katanaEntriesCount, err := CountLinesInDir(crawlingDir)
 	if err != nil {
 		return "", err
 	}
@@ -88,7 +88,7 @@ func WriteScanSummary(opt *Options, startedAt, finishedAt time.Time) (string, er
 			SubdomainsFile:        subdomainsFile,
 			LiveURLsFile:          liveURLsFile,
 			LiveURLsWithTechFile:  liveURLsWithTechFile,
-			KatanaOutputFile:      katanaOutputFile,
+			KatanaCrawlingDir:     crawlingDir,
 			GowitnessDatabaseFile: gowitnessDBFile,
 		},
 	}

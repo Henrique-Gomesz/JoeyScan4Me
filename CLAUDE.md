@@ -18,7 +18,7 @@ All stages are wired together in `pkg/runner/runner.go`. Katana and Gowitness ru
 ```
 module github.com/henrique-gomesz/joeyscan4me
 go 1.25.1
-current version: 1.1.2  (set in cmd/joeyscan4me/main.go as var Version string)
+current version: 1.2.0  (set in cmd/joeyscan4me/main.go as var Version string)
 ```
 
 ## Directory Structure
@@ -60,12 +60,16 @@ Every tool stage follows the same pattern — see `subfinder.go` as the referenc
        return nil
    }
    ```
-4. Register the output filename constant in `output.go`:
+   > If the stage outputs a **directory** (like Katana), use `dirNonEmpty(dir)` instead.
+4. Register the output filename/dirname constant in `output.go`:
    ```go
-   var <Toolname>OutputFile = "output_name.txt"
+   var <Toolname>OutputFile = "output_name.txt"   // for single-file stages
+   var <Toolname>Dir       = "dirname"             // for directory-based stages
    ```
 5. Wire it into `runner.go` (sequential → add after HTTPX; concurrent → add a goroutine like Katana/Gowitness)
-6. If it produces countable output, add a count field to `summaryCounts` in `summary.go`
+6. If it produces countable output:
+   - Single file → use `countUniqueLinesFromFile()` in `summary.go`
+   - Directory of files → use `CountLinesInDir()` in `summary.go`
 
 ### Adding a New CLI Flag
 
@@ -88,17 +92,20 @@ Resume is checked per-stage using `FileNonEmpty(filePath)`. Each stage must chec
 
 All output is generated under `<workdir>/output/<domain>/`:
 
-| File | Constant | Produced by |
+| File/Dir | Constant | Produced by |
 |---|---|---|
 | `subdomains.txt` | `SubfinderOutputFile` | Subfinder |
 | `up_subdomains.txt` | `HttpxOutputFile` | HTTPX |
 | `up_subdomains_with_tech.txt` | `HttpxTechOutputFile` | HTTPX |
-| `crawling_results.txt` | `KatanaOutputFile` | Katana |
+| `crawling/<host>.txt` | `KatanaCrawlingDir` (dir name) | Katana (one file per subdomain) |
 | `scan_summary.json` | `opt.SummaryFile` | summary.go |
 | `screenshots/gowitness.sqlite3` | — | Gowitness |
 | `screenshots/*.png` | — | Gowitness |
 
 Helper: `GetOutputFilePath(workdir, domain)` returns the base output dir.
+
+> **Resume tip for directory-based stages:** To force Katana to re-run, delete its output directory:
+> `rm -rf output/example.com/crawling/`
 
 ## Logging
 

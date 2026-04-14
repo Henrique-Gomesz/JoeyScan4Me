@@ -7,7 +7,7 @@ A easy-to-use recon tool kit for subdomain enumeration, HTTP probing, web crawli
 
 - **Subdomain Enumeration**: Uses [Subfinder](https://github.com/projectdiscovery/subfinder) to discover subdomains
 - **HTTP Probing**: Uses [HTTPX](https://github.com/projectdiscovery/httpx) to identify live web services
-- **Web Crawling**: Uses [Katana](https://github.com/projectdiscovery/katana) to crawl discovered websites
+- **Web Crawling**: Uses [Katana](https://github.com/projectdiscovery/katana) to crawl discovered websites, with results stored **per subdomain** in a dedicated `crawling/` folder
 - **Screenshot Capture and Dashboard**: Uses [Gowitness](https://github.com/sensepost/gowitness) to capture screenshots with database storage and a web dashboard for easy viewing
 - **Resume Support**: Re-run a scan with `-r` to skip any stage whose output already exists, picking up exactly where you left off
 
@@ -20,7 +20,7 @@ Require Go 1.21 or higher.
 go install github.com/henrique-gomesz/joeyscan4me/cmd/joeyscan4me@main
 ```
 
-## Latest stable release (v1.1.2)
+## Latest stable release (v1.2.0)
 ```bash
 go install github.com/henrique-gomesz/joeyscan4me/cmd/joeyscan4me@latest
 ```
@@ -124,6 +124,7 @@ joeyscan4me -d example.com -r
 ```
 
 > **Tip:** To force a specific stage to re-run while resuming, delete its output file (e.g. `rm output/example.com/up_subdomains.txt`) — that stage will run again even with `-r`.
+> To force Katana to re-run, delete the entire crawling directory: `rm -rf output/example.com/crawling/`
 
 ## Output Files
 The output files will be stored in the specified working directory (or current directory by default) with the following structure:
@@ -133,9 +134,12 @@ The output files will be stored in the specified working directory (or current d
 │   ├── subdomains.txt              # List of discovered subdomains
 │   ├── up_subdomains.txt           # List of live HTTP services
 │   ├── up_subdomains_with_tech.txt # Live services with technology detection
-│   ├── crawling_results.txt        # Web crawling results
 │   ├── scan_summary.json           # Consolidated scan summary and counts
+│   ├── crawling/                   # Web crawling results, one file per subdomain
+│   │   ├── api.example.com.txt
+│   │   ├── admin.example.com.txt
+│   │   └── ...                     # One .txt per crawled subdomain
 │   └── screenshots/
-│       └── gowitness.sqlite3       # Screenshot database
-│       └── screenshots...       # Screenshot images
+│       ├── gowitness.sqlite3        # Screenshot database
+│       └── ...                      # Screenshot images
 ```

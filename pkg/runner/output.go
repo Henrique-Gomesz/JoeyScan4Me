@@ -12,7 +12,6 @@ import (
 var SubfinderOutputFile = "subdomains.txt"
 var HttpxOutputFile = "up_subdomains.txt"
 var HttpxTechOutputFile = "up_subdomains_with_tech.txt"
-var KatanaOutputFile = "crawling_results.txt"
 
 func GetOutputFilePath(workdir, domain string) string {
 	return filepath.Join(workdir, "output", domain)
@@ -137,4 +136,30 @@ func FileNonEmpty(filePath string) bool {
 		return false
 	}
 	return !info.IsDir() && info.Size() > 0
+}
+
+// CountLinesInDir counts unique non-empty lines across all files in a directory (non-recursive).
+func CountLinesInDir(dir string) (int, error) {
+	entries, err := os.ReadDir(dir)
+	if os.IsNotExist(err) {
+		return 0, nil
+	}
+	if err != nil {
+		return 0, err
+	}
+
+	seen := make(map[string]struct{})
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		lines, err := ReadFileLines(filepath.Join(dir, e.Name()))
+		if err != nil {
+			return 0, err
+		}
+		for _, l := range NormalizeAndDedupeLines(lines) {
+			seen[l] = struct{}{}
+		}
+	}
+	return len(seen), nil
 }
